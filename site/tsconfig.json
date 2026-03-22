@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "jsx": "react-jsx",
+    "jsxImportSource": "preact",
+    "types": ["bun-types"],
+    "paths": {
+      "react": ["./node_modules/preact/compat/"],
+      "react-dom": ["./node_modules/preact/compat/"],
+      "react/jsx-runtime": ["./node_modules/preact/jsx-runtime/"],
+      "react/jsx-dev-runtime": ["./node_modules/preact/jsx-runtime/"]
+    }
+  },
+  "include": ["routes/**/*.ts", "routes/**/*.tsx"],
+  "exclude": ["node_modules", "dist"]
+}

@@ -1,0 +1,15 @@
+{
+  "name": "vibeframe-site",
+  "version": "0.0.1",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "dev": "bun run ../src/dev/dev-server.ts",
+    "export": "bun run ../src/cli/index.ts export"
+  },
+  "dependencies": {
+    "preact": "^10.29.0",
+    "tailwindcss": "^4.0.0",
+    "@tailwindcss/cli": "^4.0.0"
+  }
+}
