@@ -1,5 +1,5 @@
 /**
- * Claudeopt dev server with file watching, auto-reload, and on-the-fly client bundling.
+ * Vibeframe dev server with file watching, auto-reload, and on-the-fly client bundling.
  */
 
 import { resolve, relative } from "path";
@@ -13,7 +13,7 @@ import { routeNotFound } from "../errors.ts";
 import { wrapInDocument } from "../ssr/document.ts";
 import { createSSEResponse, notifyReload, injectReloadScript } from "./hot-reload.ts";
 import { validateRoutes, printValidation } from "../router/validator.ts";
-import type { ClaudeoptRequest, ClaudeoptResponse } from "../types.ts";
+import type { VibeframeRequest, VibeframeResponse } from "../types.ts";
 import type { Route } from "../router/types.ts";
 
 import type { BunPlugin } from "bun";
@@ -33,7 +33,7 @@ const port = parseInt(process.env.PORT ?? "3000", 10);
 const projectRoot = resolve(".");
 const routesDir = resolve(projectRoot, "routes");
 const pagesDir = resolve(projectRoot, "pages");
-const clientDir = resolve(projectRoot, ".claudeopt/dev-client");
+const clientDir = resolve(projectRoot, ".vibeframe/dev-client");
 
 let version = 0;
 let routes: Route[] = [];
@@ -49,7 +49,7 @@ async function buildDevClient() {
   if (existsSync(clientDir)) rmSync(clientDir, { recursive: true });
   mkdirSync(clientDir, { recursive: true });
 
-  const entriesDir = resolve(projectRoot, ".claudeopt/client-entries");
+  const entriesDir = resolve(projectRoot, ".vibeframe/client-entries");
   if (existsSync(entriesDir)) rmSync(entriesDir, { recursive: true });
   mkdirSync(entriesDir, { recursive: true });
 
@@ -66,7 +66,7 @@ async function buildDevClient() {
     const relToHydrate = relative(entriesDir, resolve(projectRoot, "src/client/hydrate.ts"));
     const relToPage = relative(entriesDir, route.pagePath);
 
-    const entryContent = `import { hydrate } from "${relToHydrate}";\nimport Page from "${relToPage}";\nhydrate(Page, document.getElementById("__claudeopt"));\n`;
+    const entryContent = `import { hydrate } from "${relToHydrate}";\nimport Page from "${relToPage}";\nhydrate(Page, document.getElementById("__vibeframe"));\n`;
     const entryPath = resolve(entriesDir, `${entryName}.ts`);
     await Bun.write(entryPath, entryContent);
     entrypoints.push(entryPath);
@@ -97,7 +97,7 @@ async function buildDevClient() {
   for (const output of result.outputs) {
     if (output.kind === "entry-point") {
       const name = output.path.split("/").pop()!;
-      clientManifest[name] = `/__claudeopt/client/${name}`;
+      clientManifest[name] = `/__vibeframe/client/${name}`;
     }
   }
 }
@@ -132,8 +132,8 @@ if (existsSync(stylesInput)) {
 await buildDevClient();
 console.log(`  Built dev client (${Object.keys(clientManifest).length} entries)\n`);
 
-serve(async (req: ClaudeoptRequest, res: ClaudeoptResponse) => {
-  if (req.url.pathname === "/__claudeopt/reload") {
+serve(async (req: VibeframeRequest, res: VibeframeResponse) => {
+  if (req.url.pathname === "/__vibeframe/reload") {
     return createSSEResponse();
   }
 
@@ -147,8 +147,8 @@ serve(async (req: ClaudeoptRequest, res: ClaudeoptResponse) => {
   }
 
   // Serve dev client bundles
-  if (req.url.pathname.startsWith("/__claudeopt/client/")) {
-    const fileName = req.url.pathname.replace("/__claudeopt/client/", "");
+  if (req.url.pathname.startsWith("/__vibeframe/client/")) {
+    const fileName = req.url.pathname.replace("/__vibeframe/client/", "");
     const filePath = resolve(clientDir, fileName);
     if (existsSync(filePath)) {
       return new Response(Bun.file(filePath), {

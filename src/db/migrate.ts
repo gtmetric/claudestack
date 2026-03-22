@@ -1,5 +1,5 @@
 /**
- * Auto-migration for Claudeopt.
+ * Auto-migration for Vibeframe.
  * Scans route schema files and creates tables using raw SQL from Drizzle table definitions.
  */
 

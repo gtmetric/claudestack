@@ -2,12 +2,12 @@
  * Middleware type definitions.
  */
 
-import type { ClaudeoptRequest, ClaudeoptResponse } from "../types.ts";
+import type { VibeframeRequest, VibeframeResponse } from "../types.ts";
 
 export type NextFunction = () => Promise<Response>;
 
 export type Middleware = (
-  req: ClaudeoptRequest,
-  res: ClaudeoptResponse,
+  req: VibeframeRequest,
+  res: VibeframeResponse,
   next: NextFunction,
 ) => Promise<Response>;

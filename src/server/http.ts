@@ -1,8 +1,8 @@
 /**
- * Claudeopt HTTP server — a thin wrapper around Bun.serve().
+ * Vibeframe HTTP server — a thin wrapper around Bun.serve().
  */
 
-import type { ClaudeoptRequest, ClaudeoptResponse, ClaudeoptHandler, ClaudeoptConfig } from "../types.ts";
+import type { VibeframeRequest, VibeframeResponse, VibeframeHandler, VibeframeConfig } from "../types.ts";
 
 function parseHeaders(request: Request): Record<string, string> {
   const headers: Record<string, string> = {};
@@ -20,7 +20,7 @@ function parseQuery(url: URL): Record<string, string> {
   return query;
 }
 
-export function createRequest(raw: Request): ClaudeoptRequest {
+export function createRequest(raw: Request): VibeframeRequest {
   const url = new URL(raw.url);
   return {
     method: raw.method,
@@ -42,11 +42,11 @@ export function createRequest(raw: Request): ClaudeoptRequest {
   };
 }
 
-export function createResponse(): ClaudeoptResponse {
+export function createResponse(): VibeframeResponse {
   let statusCode = 200;
   const responseHeaders = new Headers();
 
-  const res: ClaudeoptResponse = {
+  const res: VibeframeResponse = {
     status(code: number) {
       statusCode = code;
       return res;
@@ -76,7 +76,7 @@ export function createResponse(): ClaudeoptResponse {
   return res;
 }
 
-export function serve(handler: ClaudeoptHandler, config: ClaudeoptConfig = {}) {
+export function serve(handler: VibeframeHandler, config: VibeframeConfig = {}) {
   const port = config.port ?? 3000;
   const hostname = config.hostname ?? "localhost";
 
@@ -97,6 +97,6 @@ export function serve(handler: ClaudeoptHandler, config: ClaudeoptConfig = {}) {
     },
   });
 
-  console.log(`\n  Claudeopt server running at http://${hostname}:${port}\n`);
+  console.log(`\n  Vibeframe server running at http://${hostname}:${port}\n`);
   return server;
 }

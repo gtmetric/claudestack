@@ -1,10 +1,10 @@
 /**
  * Scaffold a new route directory with all the right files.
  *
- * Usage: claudeopt new route <name>
- *   claudeopt new route users         → routes/users/
- *   claudeopt new route users/[id]    → routes/users/[id]/
- *   claudeopt new route blog/[slug]   → routes/blog/[slug]/
+ * Usage: vibeframe new route <name>
+ *   vibeframe new route users         → routes/users/
+ *   vibeframe new route users/[id]    → routes/users/[id]/
+ *   vibeframe new route blog/[slug]   → routes/blog/[slug]/
  */
 
 import { resolve, join } from "path";
@@ -65,9 +65,9 @@ export default function ${componentName}(${propsArg}) {
       ? `  // Access route params via req.params\n  return { id: req.params.id };`
       : `  return { title: "${routePath}" };`;
 
-    await Bun.write(join(targetDir, "loader.ts"), `import type { ClaudeoptRequest } from "${srcPrefix}/types.ts";
+    await Bun.write(join(targetDir, "loader.ts"), `import type { VibeframeRequest } from "${srcPrefix}/types.ts";
 
-export async function loader(req: ClaudeoptRequest) {
+export async function loader(req: VibeframeRequest) {
 ${loaderBody}
 }
 
@@ -77,9 +77,9 @@ export type Props = Awaited<ReturnType<typeof loader>>;
 
   // action.ts
   if (hasAction) {
-    await Bun.write(join(targetDir, "action.ts"), `import type { ClaudeoptRequest, ActionResult } from "${srcPrefix}/types.ts";
+    await Bun.write(join(targetDir, "action.ts"), `import type { VibeframeRequest, ActionResult } from "${srcPrefix}/types.ts";
 
-export async function action(req: ClaudeoptRequest): Promise<ActionResult> {
+export async function action(req: VibeframeRequest): Promise<ActionResult> {
   const form = await req.formData();
   // TODO: process form data
   return { redirect: "/${routePath.replace(/\[.*?\]/g, "")}" };

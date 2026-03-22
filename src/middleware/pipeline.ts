@@ -2,11 +2,11 @@
  * Middleware composition — the onion model.
  */
 
-import type { ClaudeoptRequest, ClaudeoptResponse } from "../types.ts";
+import type { VibeframeRequest, VibeframeResponse } from "../types.ts";
 import type { Middleware, NextFunction } from "./types.ts";
 
 export function compose(middlewares: Middleware[]): Middleware {
-  return async (req: ClaudeoptRequest, res: ClaudeoptResponse, finalNext: NextFunction): Promise<Response> => {
+  return async (req: VibeframeRequest, res: VibeframeResponse, finalNext: NextFunction): Promise<Response> => {
     let index = -1;
 
     async function dispatch(i: number): Promise<Response> {

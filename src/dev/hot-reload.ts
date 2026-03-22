@@ -5,15 +5,15 @@
 export const RELOAD_SCRIPT = `
 <script>
 (function() {
-  const es = new EventSource("/__claudeopt/reload");
+  const es = new EventSource("/__vibeframe/reload");
   es.onmessage = function(e) {
     if (e.data === "reload") {
-      console.log("[Claudeopt] File changed, reloading...");
+      console.log("[Vibeframe] File changed, reloading...");
       window.location.reload();
     }
   };
   es.onerror = function() {
-    console.log("[Claudeopt] SSE connection lost, retrying...");
+    console.log("[Vibeframe] SSE connection lost, retrying...");
   };
 })();
 </script>`;

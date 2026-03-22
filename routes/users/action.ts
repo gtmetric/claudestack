@@ -1,8 +1,8 @@
-import type { ClaudeoptRequest, ActionResult } from "../../src/types.ts";
+import type { VibeframeRequest, ActionResult } from "../../src/types.ts";
 import { getDatabase } from "../../src/db/database.ts";
 import { users } from "./schema.ts";
 
-export async function action(req: ClaudeoptRequest): Promise<ActionResult> {
+export async function action(req: VibeframeRequest): Promise<ActionResult> {
   const form = await req.formData();
   const name = form.get("name") as string;
   const email = form.get("email") as string;

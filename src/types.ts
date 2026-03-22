@@ -1,9 +1,9 @@
 /**
- * Core types for the Claudeopt framework.
+ * Core types for the Vibeframe framework.
  * All request/response types used throughout the framework are defined here.
  */
 
-export interface ClaudeoptRequest {
+export interface VibeframeRequest {
   /** HTTP method (GET, POST, etc.) */
   method: string;
   /** Parsed URL object */
@@ -22,9 +22,9 @@ export interface ClaudeoptRequest {
   raw: Request;
 }
 
-export interface ClaudeoptResponse {
+export interface VibeframeResponse {
   /** Set the HTTP status code. Chainable. */
-  status: (code: number) => ClaudeoptResponse;
+  status: (code: number) => VibeframeResponse;
   /** Send an HTML string response */
   html: (content: string) => Response;
   /** Send a JSON response */
@@ -34,14 +34,14 @@ export interface ClaudeoptResponse {
   /** Send a plain text response */
   text: (content: string) => Response;
   /** Set a response header. Chainable. */
-  header: (name: string, value: string) => ClaudeoptResponse;
+  header: (name: string, value: string) => VibeframeResponse;
 }
 
 /** A handler function that processes a request and returns a response */
-export type ClaudeoptHandler = (req: ClaudeoptRequest, res: ClaudeoptResponse) => Response | Promise<Response>;
+export type VibeframeHandler = (req: VibeframeRequest, res: VibeframeResponse) => Response | Promise<Response>;
 
-/** Configuration for the Claudeopt server */
-export interface ClaudeoptConfig {
+/** Configuration for the Vibeframe server */
+export interface VibeframeConfig {
   port?: number;
   hostname?: string;
   pagesDir?: string;
@@ -54,19 +54,19 @@ export interface ClaudeoptConfig {
  * Usage: Define your loader, then use its return type as page props.
  *
  *   // loader.ts
- *   export async function loader(req: ClaudeoptRequest) {
+ *   export async function loader(req: VibeframeRequest) {
  *     return { users: User.findAll() };
  *   }
  *
  *   // page.tsx
  *   import type { loader } from "./loader.ts";
- *   import type { PageProps } from "claudeopt";
+ *   import type { PageProps } from "vibeframe";
  *
  *   export default function UsersPage(props: PageProps<typeof loader>) {
  *     props.users  // ← fully typed as User[]
  *   }
  */
-export type LoaderFunction = (req: ClaudeoptRequest) => any | Promise<any>;
+export type LoaderFunction = (req: VibeframeRequest) => any | Promise<any>;
 
 /** Extract the return type of a loader function, unwrapping Promises */
 export type LoaderData<T extends LoaderFunction> = Awaited<ReturnType<T>>;

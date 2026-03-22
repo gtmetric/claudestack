@@ -1,5 +1,5 @@
 /**
- * Claudeopt application — wires together server, router, middleware, and SSR.
+ * Vibeframe application — wires together server, router, middleware, and SSR.
  */
 
 import { resolve } from "path";
@@ -11,9 +11,9 @@ import { renderPage } from "../ssr/renderer.ts";
 import { compose, loadMiddleware } from "../middleware/pipeline.ts";
 import { routeNotFound } from "../errors.ts";
 import { wrapInDocument } from "../ssr/document.ts";
-import type { ClaudeoptConfig, ClaudeoptRequest, ClaudeoptResponse } from "../types.ts";
+import type { VibeframeConfig, VibeframeRequest, VibeframeResponse } from "../types.ts";
 
-export async function createApp(config: ClaudeoptConfig = {}) {
+export async function createApp(config: VibeframeConfig = {}) {
   const projectRoot = resolve(".");
   const routesDir = resolve(config.routesDir ?? "routes");
   const pagesDir = resolve(config.pagesDir ?? "pages");
@@ -29,7 +29,7 @@ export async function createApp(config: ClaudeoptConfig = {}) {
   const { syncSchemas } = await import("../db/migrate.ts");
   await syncSchemas(routes);
 
-  return serve(async (req: ClaudeoptRequest, res: ClaudeoptResponse) => {
+  return serve(async (req: VibeframeRequest, res: VibeframeResponse) => {
     // Serve static files from public/
     if (req.url.pathname.startsWith("/public/")) {
       const fileName = req.url.pathname.replace("/public/", "");

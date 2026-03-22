@@ -1,10 +1,10 @@
 /**
- * Drizzle schema helpers for Claudeopt.
+ * Drizzle schema helpers for Vibeframe.
  * Re-exports Drizzle's SQLite schema builders for convenience.
  *
  * Usage:
- *   import { sqliteTable, text, integer } from "claudeopt/db/schema";
- *   import { getDatabase } from "claudeopt/db/database";
+ *   import { sqliteTable, text, integer } from "vibeframe/db/schema";
+ *   import { getDatabase } from "vibeframe/db/database";
  *
  *   export const users = sqliteTable("users", {
  *     id: integer("id").primaryKey({ autoIncrement: true }),

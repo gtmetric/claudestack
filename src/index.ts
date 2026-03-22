@@ -1,5 +1,5 @@
 /**
- * Claudeopt — An AI-optimal full-stack framework.
+ * Vibeframe — An AI-optimal full-stack framework.
  * Public API exports.
  */
 
@@ -12,7 +12,7 @@ export { scanRoutes } from "./router/scanner.ts";
 export { matchRoute } from "./router/matcher.ts";
 
 // Errors
-export { ClaudeoptError } from "./errors.ts";
+export { VibeframeError } from "./errors.ts";
 
 // Middleware
 export { compose } from "./middleware/pipeline.ts";
@@ -35,7 +35,7 @@ export { h, Fragment } from "preact";
 export { useState, useEffect, useRef, useMemo, useCallback, useContext } from "preact/hooks";
 
 // Types
-export type { ClaudeoptRequest, ClaudeoptResponse, ClaudeoptHandler, ClaudeoptConfig, LoaderFunction, LoaderData, PageProps, ActionResult } from "./types.ts";
+export type { VibeframeRequest, VibeframeResponse, VibeframeHandler, VibeframeConfig, LoaderFunction, LoaderData, PageProps, ActionResult } from "./types.ts";
 export type { Route, RouteMatch, Segment } from "./router/types.ts";
 export type { Middleware, NextFunction } from "./middleware/types.ts";
 export type { DocumentOptions } from "./ssr/document.ts";

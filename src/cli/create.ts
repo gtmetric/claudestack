@@ -1,8 +1,8 @@
 /**
- * claudeopt create <project-name>
+ * vibeframe create <project-name>
  *
- * Scaffolds a new Claudeopt project with:
- *   - package.json (with claudeopt + preact as dependencies)
+ * Scaffolds a new Vibeframe project with:
+ *   - package.json (with vibeframe + preact as dependencies)
  *   - tsconfig.json (jsx configured for preact)
  *   - routes/index/page.tsx (home page)
  *   - routes/counter/page.tsx (interactive demo)
@@ -23,7 +23,7 @@ export async function createProject(name: string) {
     process.exit(1);
   }
 
-  console.log(`\n  Creating Claudeopt project: ${name}\n`);
+  console.log(`\n  Creating Vibeframe project: ${name}\n`);
 
   // Create directories
   const dirs = [
@@ -44,13 +44,13 @@ export async function createProject(name: string) {
     version: "0.0.1",
     type: "module",
     scripts: {
-      dev: "bun run node_modules/claudeopt/src/dev/dev-server.ts",
-      build: "bun run node_modules/claudeopt/src/cli/index.ts build",
-      start: "bun run node_modules/claudeopt/src/cli/index.ts start",
-      routes: "bun run node_modules/claudeopt/bin/claudeopt.ts routes",
+      dev: "bun run node_modules/vibeframe/src/dev/dev-server.ts",
+      build: "bun run node_modules/vibeframe/src/cli/index.ts build",
+      start: "bun run node_modules/vibeframe/src/cli/index.ts start",
+      routes: "bun run node_modules/vibeframe/bin/vibeframe.ts routes",
     },
     dependencies: {
-      claudeopt: "latest",
+      vibeframe: "latest",
       preact: "^10.29.0",
       tailwindcss: "^4.0.0",
       "@tailwindcss/cli": "^4.0.0",
@@ -85,7 +85,7 @@ export async function createProject(name: string) {
   // .gitignore
   await Bun.write(join(projectDir, ".gitignore"), `node_modules/
 dist/
-.claudeopt/
+.vibeframe/
 data/
 *.log
 `);
@@ -94,7 +94,7 @@ data/
   await Bun.write(join(projectDir, ".claude/launch.json"), JSON.stringify({
     version: "0.0.1",
     configurations: [{
-      name: "claudeopt-dev",
+      name: "vibeframe-dev",
       runtimeExecutable: "bun",
       runtimeArgs: ["run", "dev"],
       port: 3000,
@@ -110,7 +110,7 @@ data/
   return (
     <div class="max-w-2xl mx-auto p-8">
       <h1 class="text-4xl font-bold mb-4">${name}</h1>
-      <p class="text-lg text-gray-600 mb-6">Built with <a href="https://github.com/claudeopt/claudeopt" class="text-blue-600 hover:underline">Claudeopt</a>.</p>
+      <p class="text-lg text-gray-600 mb-6">Built with <a href="https://github.com/vibeframe/vibeframe" class="text-blue-600 hover:underline">Vibeframe</a>.</p>
       <nav class="flex gap-4">
         <a href="/counter" class="text-blue-600 hover:underline">Counter demo</a>
       </nav>
@@ -156,7 +156,7 @@ export default [
   // CLAUDE.md
   await Bun.write(join(projectDir, "CLAUDE.md"), `# ${name}
 
-Built with [Claudeopt](https://github.com/claudeopt/claudeopt) — an AI-optimal full-stack framework.
+Built with [Vibeframe](https://github.com/vibeframe/vibeframe) — an AI-optimal full-stack framework.
 
 ## Commands
 
@@ -212,7 +212,7 @@ export async function action(req) {
 
 \`\`\`tsx
 // routes/items/schema.ts
-import { schema } from "claudeopt";
+import { schema } from "vibeframe";
 
 interface Item { id: number; name: string; }
 export const Item = schema<Item>("items", {
